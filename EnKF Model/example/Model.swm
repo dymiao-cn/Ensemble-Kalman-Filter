@@ -1,0 +1,340 @@
+
+[solver] S1D_SEMIIMPLICIT  S1D_GODUNOV   S1D_GODUNOV //
+[LocalSource]
+ [NETWORKGRID]
+  [tool] RivernetworkTopoElementDistance  //通过中心线计算河段距离
+   [CenterLine]  //河段中心线
+    [tool] CoordinateTranform  //通过坐标转换工具将经纬度坐标转换为投影坐标
+     [sourceKey] Coordinate   //投影坐标信息
+      [Data]   //中心线
+       [file] CenterLine.txt
+      [/Data]
+    [/tool] 
+   [/CenterLine] 
+     [topo]
+      [NETWORKGRID]
+       [name] sanxiaGrid
+       [file] ThreeProject.net
+      [/NETWORKGRID]
+     [/topo]
+    [/tool]
+ [/NETWORKGRID]
+[/LocalSource]
+ [grid] sanxiaGrid  
+ 
+ [Parameter]
+  [CommonParameter]
+     [CFL]  0.6
+     [htol]  0.001
+  [/CommonParameter]
+  [ProcessParameter]
+   [StartTime]  2013-5-8 00:00:00 
+   [ETime]      2013-5-20 00:30:00 
+   [TImeStep]   60
+   [OutStep]    60
+  [/ProcessParameter]
+  
+  [OutputParameter] 
+   [OutDataBaseType]  Nc
+   [outDictionary]  Out\%CFILE
+   [OutDataBaseFile]  %CFILE.nc
+   [OUT]  ETA  //水位
+   [OUT]  SQ   //流量
+   [OUT]  SA   //过水面积
+  [/OutputParameter]   
+  
+  [InitialParameter]    
+   [initialZ] <ALL> 170
+   [roughness] <ALL> Constant 0.025
+   [file] roughness.txt
+      
+//   [RoughnessR] Constant %R1  //大坝-万州
+//    [tool] CoordinateTranform 
+//     [sourceKey] Coordinate
+//     [Data]
+//      108.438107	30.752683	0.000000	
+//      108.358382	30.741477	0.000000	
+//      108.348195	31.180339	0.000000	
+//      111.080881	31.180538	0.000000	
+//      111.067442	30.740887	0.000000	
+//      108.453369	30.755425	0.000000	
+//     [/Data]
+//    [/tool]  
+//   [/RoughnessR]
+//   
+//   [RoughnessR] Constant %R2  //万州-白沙沱
+//    [tool] CoordinateTranform 
+//     [sourceKey] Coordinate
+//     [Data]
+//      107.662800	29.891279	0.000000	
+//      107.689277	29.784139	0.000000	
+//      108.225876	30.231854	0.000000	
+//      108.459862	30.745033	0.000000	
+//      108.202122	30.723355	0.000000	
+//      107.663885	29.897232	0.000000	
+//     [/Data]
+//    [/tool]  
+//   [/RoughnessR]
+//   
+//   [RoughnessR] Constant %R3  //白沙沱-清溪场
+//    [tool] CoordinateTranform 
+//     [sourceKey] Coordinate
+//     [Data]
+//      107.407846	29.874175	0.000000	
+//      107.566801	29.695770	0.000000	
+//      107.679369	29.784663	0.000000	
+//      107.623978	29.988359	0.000000	
+//      107.407775	29.884278	0.000000	
+//      [/Data]
+//    [/tool]  
+//   [/RoughnessR]
+//   
+//   [RoughnessR] Constant %R4  //清溪场-北拱
+//    [tool] CoordinateTranform 
+//     [sourceKey] Coordinate
+//     [Data]
+//      107.239118	29.733706	0.000000	
+//      107.251672	29.652282	0.000000	
+//      107.510886	29.751247	0.000000	
+//      107.415045	29.845821	0.000000	
+//      107.243645	29.738823	0.000000	
+//     [/Data]
+//    [/tool]  
+//   [/RoughnessR]   
+//   
+//   [RoughnessR] Constant %R5  //北拱-卫东
+//    [tool] CoordinateTranform 
+//     [sourceKey] Coordinate
+//     [Data]
+//      107.117848	29.768337	0.000000	
+//      107.061219	29.759678	0.000000	
+//      107.162227	29.635206	0.000000	
+//      107.242188	29.670910	0.000000	
+//      107.227436	29.736547	0.000000	
+//      107.122674	29.767975	0.000000	
+//     [/Data]
+//    [/tool]  
+//   [/RoughnessR]      
+//      
+//   [RoughnessR] Constant %R6  //卫东-长寿水位站
+//    [tool] CoordinateTranform 
+//     [sourceKey] Coordinate
+//     [Data]
+//      107.050434	29.828647	0.000000	
+//      107.056951	29.765529	0.000000	
+//      107.127914	29.777838	0.000000	
+//      107.114397	29.837336	0.000000	
+//      107.052969	29.829371	0.000000	
+//     [/Data]
+//    [/tool]  
+//   [/RoughnessR]      
+//      
+//   [RoughnessR] Constant %R7  //长寿水位站-扇沱 
+//    [tool] CoordinateTranform 
+//     [sourceKey] Coordinate
+//     [Data]
+//      106.990333	29.784355	0.000000	
+//      106.998299	29.754546	0.000000	
+//      107.049710	29.796786	0.000000	
+//      107.040538	29.826716	0.000000	
+//      106.992385	29.784717	0.000000	
+//     [/Data]
+//    [/tool]  
+//   [/RoughnessR]      
+//      
+//   [RoughnessR] Constant %R8  //扇沱-麻柳嘴
+//    [tool] CoordinateTranform 
+//     [sourceKey] Coordinate
+//     [Data]
+//      106.910127	29.709500	0.000000	
+//      106.945467	29.683149	0.000000	
+//      106.995952	29.753090	0.000000	
+//      106.978467	29.788799	0.000000	
+//      106.908649	29.713194	0.000000	
+//     [/Data]
+//    [/tool]  
+//   [/RoughnessR]      
+//      
+//   [RoughnessR] Constant %R9  //麻柳嘴-太洪岗
+//    [tool] CoordinateTranform 
+//     [sourceKey] Coordinate
+//     [Data]
+//      106.881861	29.668962	0.000000	
+//      106.909087	29.651449	0.000000	
+//      106.935630	29.684695	0.000000	
+//      106.907309	29.703029	0.000000	
+//      106.881998	29.670740	0.000000	
+//     [/Data]
+//    [/tool]  
+//   [/RoughnessR]      
+//       
+//   [RoughnessR] Constant %R10  //太洪岗-羊角背
+//    [tool] CoordinateTranform 
+//     [sourceKey] Coordinate
+//     [Data]
+//      106.841000	29.595093	0.000000	
+//      106.858752	29.565582	0.000000	
+//      106.905451	29.643827	0.000000	
+//      106.874243	29.657735	0.000000	
+//      106.841113	29.597355	0.000000	
+//     [/Data]
+//    [/tool]  
+//   [/RoughnessR]   
+//   
+//   [RoughnessR] Constant %R11 //羊角背-鱼嘴水位站
+//    [tool] CoordinateTranform 
+//     [sourceKey] Coordinate
+//     [Data]
+//      106.731498	29.620432	0.000000	
+//      106.781430	29.550315	0.000000	
+//      106.848896	29.575826	0.000000	
+//      106.835928	29.601013	0.000000	
+//      106.800996	29.631653	0.000000	
+//      106.735013	29.622121	0.000000	
+//     [/Data]
+//    [/tool]  
+//   [/RoughnessR]      
+//   
+//   [RoughnessR] Constant %R12  //鱼嘴水位站-铜锣峡水位站
+//    [tool] CoordinateTranform 
+//     [sourceKey] Coordinate
+//     [Data]
+//      106.661679	29.598273	0.000000	
+//      106.640677	29.581703	0.000000	
+//      106.666210	29.530033	0.000000	
+//      106.757436	29.579631	0.000000	
+//      106.723658	29.604965	0.000000	
+//      106.663712	29.598874	0.000000	
+//     [/Data]
+//    [/tool]  
+//   [/RoughnessR]      
+//   
+//   [RoughnessR] Constant %R13  //铜锣峡水位站-寸滩 
+//    [tool] CoordinateTranform 
+//     [sourceKey] Coordinate
+//     [Data]
+//      106.598123	29.626762	0.000000	
+//      106.605012	29.602449	0.000000	
+//      106.636085	29.584149	0.000000	
+//      106.652080	29.591724	0.000000	
+//      106.658007	29.607060	0.000000	
+//      106.601262	29.630710	0.000000	
+//     [/Data]
+//    [/tool]  
+//   [/RoughnessR]         
+//
+//   
+//   [RoughnessR] Constant %R14  //寸滩-玄坛庙
+//    [tool] CoordinateTranform 
+//     [sourceKey] Coordinate
+//     [Data]
+//      106.581388	29.566580	0.000000	
+//      106.600525	29.577550	0.000000	
+//      106.599700	29.609967	0.000000	
+//      106.584440	29.632073	0.000000	
+//      106.554416	29.588851	0.000000	
+//      106.579409	29.566745	0.000000	
+//     [/Data]
+//    [/tool]  
+//   [/RoughnessR]         
+//     
+//   [RoughnessR] Constant %R15  //玄坛庙-鹅公岩
+//    [tool] CoordinateTranform 
+//     [sourceKey] Coordinate
+//     [Data]
+//      106.526153	29.498970	0.000000	
+//      106.564580	29.531154	0.000000	
+//      106.604191	29.562153	0.000000	
+//      106.518080	29.564844	0.000000	
+//      106.496230	29.523511	0.000000	
+//      106.521309	29.498216	0.000000	
+//     [/Data]
+//    [/tool]  
+//   [/RoughnessR]         
+//   
+//   [RoughnessR] Constant %R16  //鹅公岩-落中子
+//    [tool] CoordinateTranform 
+//     [sourceKey] Coordinate
+//     [Data]
+//      106.492053	29.484066	0.000000	
+//      106.533392	29.452811	0.000000	
+//      106.574232	29.483066	0.000000	
+//      106.549344	29.515588	0.000000	
+//      106.521516	29.493409	0.000000	
+//      106.493068	29.488174	0.000000	
+//     [/Data]
+//    [/tool]  
+//   [/RoughnessR]            
+//  
+//   [RoughnessR] Constant %R17  //落中子-钓二嘴
+//    [tool] CoordinateTranform 
+//     [sourceKey] Coordinate
+//     [Data]
+//      106.511256	29.404547	0.000000	
+//      106.497379	29.378928	0.000000	
+//      106.559388	29.394386	0.000000	
+//      106.515209	29.461217	0.000000	
+//      106.479291	29.466724	0.000000	
+//      106.490930	29.421043	0.000000	
+//      106.511079	29.408278	0.000000	
+//     [/Data]
+//    [/tool]  
+//   [/RoughnessR]               
+//     
+//   [RoughnessR] Constant %R18  //钓二嘴-小南海
+//    [tool] CoordinateTranform 
+//     [sourceKey] Coordinate
+//     [Data]
+//      106.508549	29.407946	0.000000	
+//      106.482966	29.360946	0.000000	
+//      106.434028	29.341177	0.000000	
+//      106.420461	29.370831	0.000000	
+//      106.457479	29.410369	0.000000	
+//      106.506320	29.408721	0.000000	
+//     [/Data]
+//    [/tool]  
+//   [/RoughnessR]               
+//      
+//   [RoughnessR] Constant %R19  //小南海-双龙
+//    [tool] CoordinateTranform 
+//     [sourceKey] Coordinate
+//     [Data]
+//      106.361438	29.295168	0.000000	
+//      106.394443	29.260004	0.000000	
+//      106.426938	29.343820	0.000000	
+//      106.409840	29.365471	0.000000	
+//      106.368759	29.342377	0.000000	
+//      106.359988	29.299742	0.000000	
+//     [/Data]
+//    [/tool]  
+//   [/RoughnessR]                  
+// 
+//   [RoughnessR] Constant %R20  //双龙-塔坪
+//    [tool] CoordinateTranform 
+//     [sourceKey] Coordinate
+//     [Data]
+//      106.248638	29.309475	0.000000	
+//      106.254031	29.278653	0.000000	
+//      106.302062	29.238071	0.000000	
+//      106.379631	29.269663	0.000000	
+//      106.355230	29.297403	0.000000	
+//      106.250435	29.311658	0.000000		
+//     [/Data]
+//    [/tool]  
+//   [/RoughnessR]     
+   
+  [/InitialParameter]
+  
+  [Boundary] 
+   [type]  discharge
+    S400 Q1  
+   [type]  SideQ
+    S331.1 Q2    //嘉陵江汇入
+    S269 Q3    //乌江汇入
+   [type] waterlevel
+    S34 Z   //大坝水位
+  [/Boundary]
+
+ [/Parameter]
+ 
+[/solver]
