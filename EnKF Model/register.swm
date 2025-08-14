@@ -1,0 +1,122 @@
+// =========说明===========
+// model 中的名字不区分大小写
+// 可以采用多个名字，切记不要有重复的名字，否则后面出现的将会覆盖前面的
+//
+
+//*************Start 钟华临时加载************
+ [model] 
+  [name] GateControl
+ [class] SourceControl.GateControl
+  [assemble] SourceControl.dll
+[/model]
+
+[model] 
+  [name] SelfdefineGate
+  [class] SourceControl.SelfdefineGate
+  [assemble] SourceControl.dll
+[/model]
+
+[model] 
+  [name] ChannelOutControl
+  [class] SourceControl.ChannelOutControl
+  [assemble] SourceControl.dll  
+[/model]
+//====End 钟华临时加载======
+
+/*************start tool*************
+[model] 
+  [name] GetDAResult
+  [class] Common.Model.Tool.HhModel.OneD.GetDAResult
+  [assemble] Common.dll
+[/model]
+
+[model] 
+  [name] GetPointResult
+  [class] Common.Model.Tool.HhModel.OneD.GetPointResult
+  [assemble] Common.dll
+[/model]
+
+[model]
+  [name] DesignDxElevation
+  [class] Common.Model.Tool.HhModel.DxDesign.DesignDxElevation
+  [assemble] Common.dll
+[/model]
+
+[model]
+  [name] UnstructureTxtFormatChanging
+  [class] Common.Model.Tool.HhModel.TwoD.UnstructureTxtFormatChanging
+  [assemble] Common.dll
+[/model]
+
+[model]
+  [name] UniformStructureGridToUnstructureGrid
+  [class] Common.Model.Tool.HhModel.TwoD.UniformStructureGridToUnstructureGrid
+  [assemble] Common.dll
+[/model]
+
+[model]
+  [name] ShipSimulator
+  [class] Common.Model.ShipWave.ShipSimulator
+  [assemble] Common.dll
+[/model]
+
+[model]
+  [name] RiverNetCheck
+  [class] Common.Model.Tool.HhModel.OneD.Rivernet.RiverNetCheck
+  [assemble] Common.dll
+[/model]
+
+
+//====end tool==========
+
+//*************test*************
+[model]
+  [name] BaseStructureTest
+  [class] Common.BaseStructure.BaseStructureTest
+  [assemble] Common.dll
+[/model]
+
+  [model]
+  [name] UICommonTest
+  [class] UICore.UICommon.UICommonTest
+  [assemble] UICore.dll
+[/model]
+
+[model]
+  [name] TestSeriaCodel
+  [class] Common.Series.TestSeriaCodel
+  [assemble] Common.dll
+[/model]
+
+
+//=========end test ======
+
+//***********selfcode************
+
+[model]
+  [name] ShipWaveModel
+  [class] Common.Model.ShipWave.ShipWaveModel
+  [assemble] Common.dll
+[/model]
+
+//==========end selfcode=========
+
+//**********model****************
+
+[model]
+  [name] UniformGrid
+  [class] Common.Model.Topo.StructuredGrid.UniformGrid
+  [assemble] Common.dll
+[/model]
+
+//========end model==============
+
+//**********Database****************
+
+[model]
+  [name] Dat  //tecplot格式
+  [class] DataBase.MyTeplot.MyTecplotDB
+  [assemble] DataBase.dll
+[/model]
+
+//========end model==============
